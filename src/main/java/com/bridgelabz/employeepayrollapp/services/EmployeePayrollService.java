@@ -16,8 +16,6 @@ import java.util.stream.Collectors;
 @Service
 public class EmployeePayrollService implements IEmployeePayrollService {
 
-    private static final String EMPLOYEE_ADDED_SUCCESSFULLY = "Employee Added Successfully";
-    private static final String EMPLOYEE_UPDATED_SUCCESSFULLY = "Employee Updated Successfully";
     private static final String EMPLOYEE_DELETED_SUCCESSFULLY = "Employee Deleted Successfully";
 
     @Autowired
@@ -42,17 +40,17 @@ public class EmployeePayrollService implements IEmployeePayrollService {
     }
 
     @Override
-    public String addEmployee(EmployeeDto empPayrollDTO) {
-        Employee employee = modelMapper.map(empPayrollDTO, Employee.class);
+    public Employee addEmployee(EmployeeDto empPayrollDTO) {
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(empPayrollDTO, employee);
         employeeRepo.save(employee);
-        return EMPLOYEE_ADDED_SUCCESSFULLY;
+        return employeeRepo.save(employee);
     }
 
-    public String updateEmployee(int id, EmployeeDto employeeDto) {
+    public Employee updateEmployee(int id, EmployeeDto employeeDto) {
         Employee employee = checkIdPresentOrNot(id);
         BeanUtils.copyProperties(employeeDto, employee);
-        employeeRepo.save(employee);
-        return EMPLOYEE_UPDATED_SUCCESSFULLY;
+        return employeeRepo.save(employee);
     }
 
     public String deleteEmployee(int empId) {
