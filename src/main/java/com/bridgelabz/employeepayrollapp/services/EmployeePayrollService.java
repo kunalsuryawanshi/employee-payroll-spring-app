@@ -1,6 +1,6 @@
 package com.bridgelabz.employeepayrollapp.services;
 
-import com.bridgelabz.employeepayrollapp.configuration.AtmConfiguration;
+import com.bridgelabz.employeepayrollapp.configuration.EmployeeConfiguration;
 import com.bridgelabz.employeepayrollapp.dto.EmployeeDto;
 import com.bridgelabz.employeepayrollapp.models.Employee;
 import com.bridgelabz.employeepayrollapp.repository.EmployeePayrollRepository;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class EmployeePayrollService implements IEmployeePayrollService {
+public class EmployeePayrollService {
 
     private static final String EMPLOYEE_ADDED_SUCCESSFULLY = "Employee Added Successfully";
     private static final String EMPLOYEE_UPDATED_SUCCESSFULLY = "Employee Updated Successfully";
@@ -23,25 +23,23 @@ public class EmployeePayrollService implements IEmployeePayrollService {
     @Autowired
     private EmployeePayrollRepository employeeRepo;
     @Autowired
-    private AtmConfiguration atmConfiguration;
+    private EmployeeConfiguration employeeConfiguration;
     @Autowired
     private ModelMapper modelMapper;
 
-    @Override
+
     public List<EmployeeDto> getAllEmployee() {
-        return employeeRepo.findAll()
-                .stream()
-                .map(Employee -> modelMapper.map(Employee, EmployeeDto.class))
-                .collect((Collectors.toList()));
+        return employeeRepo.findAll().stream().map(Employee -> modelMapper.map(Employee, EmployeeDto.class)).collect((Collectors.toList()));
     }
 
-    @Override
-    public Employee getEmployeeById(int empId) {
+
+    public EmployeeDto getEmployeeById(int empId) {
         checkIdPresentOrNot(empId);
-        return employeeRepo.findById(empId).get();
+        Employee employee = employeeRepo.findById(empId).get();
+        return modelMapper.map(employee, EmployeeDto.class);
     }
 
-    @Override
+
     public String addEmployee(EmployeeDto empPayrollDTO) {
         Employee employee = modelMapper.map(empPayrollDTO, Employee.class);
         employeeRepo.save(employee);

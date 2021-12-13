@@ -12,8 +12,10 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
-
     private String name;
-
-    private long salary;
+    private String imagePath;
+    private String gender;
+    private String salary;
+    private String department;
+    private String notes;
 }
