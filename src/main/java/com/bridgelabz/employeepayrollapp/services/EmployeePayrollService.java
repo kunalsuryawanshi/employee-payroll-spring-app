@@ -13,6 +13,12 @@ import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Purpose: To Define Service Class for CRUD Operations
+ *
+ * @author : Kunal Suryawanshi
+ * @since : 13-12-2021
+ */
 @Service
 public class EmployeePayrollService {
 
@@ -27,25 +33,49 @@ public class EmployeePayrollService {
     @Autowired
     private ModelMapper modelMapper;
 
-
+    /**
+     * Purpose : To Get All the Employee
+     *
+     * @return list of Employee
+     */
     public List<EmployeeDto> getAllEmployee() {
-        return employeeRepo.findAll().stream().map(Employee -> modelMapper.map(Employee, EmployeeDto.class)).collect((Collectors.toList()));
+        return employeeRepo.findAll()
+                .stream()
+                .map(Employee -> modelMapper.map(Employee, EmployeeDto.class))
+                .collect((Collectors.toList()));
     }
 
-
+    /**
+     * Purpose : To Get Contact By id
+     *
+     * @param empId for searching in repo
+     * @return Contact Dto
+     */
     public EmployeeDto getEmployeeById(int empId) {
         checkIdPresentOrNot(empId);
         Employee employee = employeeRepo.findById(empId).get();
         return modelMapper.map(employee, EmployeeDto.class);
     }
 
-
+    /**
+     * Purpose To Add Employee in Repository
+     *
+     * @param empPayrollDTO given dto for add in repository
+     * @return Success Message for Add
+     */
     public String addEmployee(EmployeeDto empPayrollDTO) {
         Employee employee = modelMapper.map(empPayrollDTO, Employee.class);
         employeeRepo.save(employee);
         return EMPLOYEE_ADDED_SUCCESSFULLY;
     }
 
+    /**
+     * Purpose To Update Existing Employee
+     *
+     * @param id          for search existing Employee
+     * @param employeeDto for update
+     * @return success message for update
+     */
     public String updateEmployee(int id, EmployeeDto employeeDto) {
         Employee employee = checkIdPresentOrNot(id);
         BeanUtils.copyProperties(employeeDto, employee);
@@ -53,12 +83,24 @@ public class EmployeePayrollService {
         return EMPLOYEE_UPDATED_SUCCESSFULLY;
     }
 
+    /**
+     * Purpose To delete Existing Employee
+     *
+     * @param empId to search for existing data in repo
+     * @return success message for delete
+     */
     public String deleteEmployee(int empId) {
         Employee employee = checkIdPresentOrNot(empId);
         employeeRepo.delete(employee);
         return EMPLOYEE_DELETED_SUCCESSFULLY;
     }
 
+    /**
+     * Purpose To Check Given id Present Or Not
+     *
+     * @param empId for check
+     * @return Employee Entity
+     */
     public Employee checkIdPresentOrNot(int empId) {
         return employeeRepo.findById(empId).orElseThrow(EntityNotFoundException::new);
     }
