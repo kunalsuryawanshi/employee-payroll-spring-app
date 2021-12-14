@@ -49,7 +49,7 @@ public class EmployeePayrollController {
      * @return : success message for add
      */
     @PostMapping("/employee")
-    public String addEmployeePayrollData(@RequestBody @Valid EmployeeDto employeeDto) {
+    public String addEmployeePayrollData(@Valid @RequestBody EmployeeDto employeeDto) {
         return employeePayrollService.addEmployee(employeeDto);
     }
 
@@ -62,7 +62,7 @@ public class EmployeePayrollController {
      */
     @PutMapping("/employee/{id}")
     public String updateEmployeePayrollData(@PathVariable(value = "id") int id,
-                                            @RequestBody @Valid EmployeeDto employeeDto) {
+                                            @Valid @RequestBody EmployeeDto employeeDto) {
         return employeePayrollService.updateEmployee(id, employeeDto);
     }
 
