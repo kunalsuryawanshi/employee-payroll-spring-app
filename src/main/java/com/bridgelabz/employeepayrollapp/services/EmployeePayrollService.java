@@ -46,7 +46,7 @@ public class EmployeePayrollService {
     }
 
     /**
-     * Purpose : To Get Contact By id
+     * Purpose : To Get Employee By id
      *
      * @param empId for searching in repo
      * @return Contact Dto

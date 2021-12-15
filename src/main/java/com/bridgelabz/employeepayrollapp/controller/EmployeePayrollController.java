@@ -54,7 +54,7 @@ public class EmployeePayrollController {
     }
 
     /**
-     * Purpose : To Edit Existing Contact
+     * Purpose : To Edit Existing Employee
      *
      * @param id          for search data in repo
      * @param employeeDto for changing existing data to new
@@ -67,7 +67,7 @@ public class EmployeePayrollController {
     }
 
     /**
-     * Purpose : To Delete Existing Contact
+     * Purpose : To Delete Existing Employee
      *
      * @param id For Search in repo
      * @return success message for delete

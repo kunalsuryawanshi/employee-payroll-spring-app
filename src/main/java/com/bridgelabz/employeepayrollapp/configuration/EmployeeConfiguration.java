@@ -3,6 +3,7 @@ package com.bridgelabz.employeepayrollapp.configuration;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 /**
  * Purpose: to configure model mapper
  *
