@@ -19,14 +19,20 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
+
     private String name;
+
     private String imagePath;
+
     private String gender;
+
     private String salary;
+
     @ElementCollection
     @CollectionTable(name = "employee_department", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "department")
     private List<String> departments;
+
     private String notes;
 
     public List<String> getDepartments() {

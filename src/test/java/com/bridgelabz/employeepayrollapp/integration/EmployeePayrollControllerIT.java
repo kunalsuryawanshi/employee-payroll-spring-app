@@ -3,6 +3,7 @@ package com.bridgelabz.employeepayrollapp.integration;
 import com.bridgelabz.employeepayrollapp.controller.EmployeePayrollController;
 import com.bridgelabz.employeepayrollapp.dto.EmployeeDto;
 import com.bridgelabz.employeepayrollapp.services.EmployeePayrollService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -98,5 +99,42 @@ public class EmployeePayrollControllerIT {
         when(employeePayrollService.getEmployeeById(id)).thenReturn(employeeDto);
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/employeepayrollservice/employee/1")).andExpect(status().isOk());
+    }
+
+    @Test
+    public void givenEmployeeForAdd_whenValidationFailed_shouldShowBadRequest() throws Exception {
+        EmployeeDto employeeDto = new EmployeeDto();
+        employeeDto.setName("kunal");
+        employeeDto.setImagePath("");
+        employeeDto.setGender("male");
+        employeeDto.setSalary("100000");
+        employeeDto.setDepartments(List.of("Marketing"));
+        employeeDto.setNotes("Test");
+        String jsonRequest = objectMapper.writeValueAsString(employeeDto);
+        when(employeePayrollService.addEmployee(any())).thenReturn("Bad Request");
+        mockMvc.perform(MockMvcRequestBuilders.post("/employeepayrollservice/employee")
+                        .content(jsonRequest).contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isBadRequest());
+
+    }
+
+    @Test
+    public void givenEmployeeForUpdate_whenValidationFailed_shouldShowBadRequest() throws Exception {
+        int id = 1;
+        EmployeeDto employeeDto = new EmployeeDto();
+        employeeDto.setName("kunal");
+        employeeDto.setImagePath("");
+        employeeDto.setGender("male");
+        employeeDto.setSalary("100000");
+        employeeDto.setDepartments(List.of("Marketing"));
+        employeeDto.setNotes("Test");
+
+        String jsonRequest = objectMapper.writeValueAsString(employeeDto);
+        when(employeePayrollService.updateEmployee(id, employeeDto))
+                .thenReturn("Bad Request");
+        mockMvc.perform(MockMvcRequestBuilders.put("/employeepayrollservice/employee/1")
+                        .content(jsonRequest).contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isBadRequest());
+
     }
 }
