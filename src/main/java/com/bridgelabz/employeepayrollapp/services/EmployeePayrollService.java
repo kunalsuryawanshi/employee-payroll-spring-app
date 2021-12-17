@@ -1,6 +1,5 @@
 package com.bridgelabz.employeepayrollapp.services;
 
-import com.bridgelabz.employeepayrollapp.configuration.EmployeeConfiguration;
 import com.bridgelabz.employeepayrollapp.dto.EmployeeDto;
 import com.bridgelabz.employeepayrollapp.models.Employee;
 import com.bridgelabz.employeepayrollapp.repository.EmployeePayrollRepository;
@@ -20,7 +19,7 @@ import java.util.stream.Collectors;
  * @since : 13-12-2021
  */
 @Service
-public class EmployeePayrollService {
+public class EmployeePayrollService implements IEmployeePayrollService {
 
     private static final String EMPLOYEE_ADDED_SUCCESSFULLY = "Employee Added Successfully";
     private static final String EMPLOYEE_UPDATED_SUCCESSFULLY = "Employee Updated Successfully";
@@ -28,8 +27,6 @@ public class EmployeePayrollService {
 
     @Autowired
     private EmployeePayrollRepository employeeRepo;
-    @Autowired
-    private EmployeeConfiguration employeeConfiguration;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -49,7 +46,7 @@ public class EmployeePayrollService {
      * Purpose : To Get Employee By id
      *
      * @param empId for searching in repo
-     * @return Contact Dto
+     * @return Employee Dto
      */
     public EmployeeDto getEmployeeById(int empId) {
         checkIdPresentOrNot(empId);
