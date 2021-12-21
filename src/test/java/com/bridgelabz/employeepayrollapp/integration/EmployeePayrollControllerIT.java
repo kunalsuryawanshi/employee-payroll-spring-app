@@ -2,8 +2,7 @@ package com.bridgelabz.employeepayrollapp.integration;
 
 import com.bridgelabz.employeepayrollapp.controller.EmployeePayrollController;
 import com.bridgelabz.employeepayrollapp.dto.EmployeeDto;
-import com.bridgelabz.employeepayrollapp.services.EmployeePayrollService;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.bridgelabz.employeepayrollapp.service.EmployeePayrollService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

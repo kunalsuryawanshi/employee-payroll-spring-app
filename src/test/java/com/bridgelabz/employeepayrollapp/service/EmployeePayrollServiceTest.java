@@ -3,7 +3,6 @@ package com.bridgelabz.employeepayrollapp.service;
 import com.bridgelabz.employeepayrollapp.dto.EmployeeDto;
 import com.bridgelabz.employeepayrollapp.models.Employee;
 import com.bridgelabz.employeepayrollapp.repository.EmployeePayrollRepository;
-import com.bridgelabz.employeepayrollapp.services.EmployeePayrollService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;

@@ -1,7 +1,7 @@
 package com.bridgelabz.employeepayrollapp.controller;
 
 import com.bridgelabz.employeepayrollapp.dto.EmployeeDto;
-import com.bridgelabz.employeepayrollapp.services.EmployeePayrollService;
+import com.bridgelabz.employeepayrollapp.service.IEmployeePayrollService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +19,7 @@ import java.util.List;
 public class EmployeePayrollController {
 
     @Autowired
-    private EmployeePayrollService employeePayrollService;
+    private IEmployeePayrollService employeePayrollService;
 
     /**
      * Purpose : to gives us list of all employee from repo

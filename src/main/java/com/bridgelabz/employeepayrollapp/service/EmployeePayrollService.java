@@ -1,4 +1,4 @@
-package com.bridgelabz.employeepayrollapp.services;
+package com.bridgelabz.employeepayrollapp.service;
 
 import com.bridgelabz.employeepayrollapp.dto.EmployeeDto;
 import com.bridgelabz.employeepayrollapp.models.Employee;
@@ -35,6 +35,7 @@ public class EmployeePayrollService implements IEmployeePayrollService {
      *
      * @return list of Employee
      */
+    @Override
     public List<EmployeeDto> getAllEmployee() {
         return employeeRepo.findAll()
                 .stream()
@@ -48,6 +49,7 @@ public class EmployeePayrollService implements IEmployeePayrollService {
      * @param empId for searching in repo
      * @return Employee Dto
      */
+    @Override
     public EmployeeDto getEmployeeById(int empId) {
         checkIdPresentOrNot(empId);
         Employee employee = employeeRepo.findById(empId).get();
@@ -60,6 +62,7 @@ public class EmployeePayrollService implements IEmployeePayrollService {
      * @param empPayrollDTO given dto for add in repository
      * @return Success Message for Add
      */
+    @Override
     public String addEmployee(EmployeeDto empPayrollDTO) {
         Employee employee = modelMapper.map(empPayrollDTO, Employee.class);
         employeeRepo.save(employee);
@@ -73,6 +76,7 @@ public class EmployeePayrollService implements IEmployeePayrollService {
      * @param employeeDto for update
      * @return success message for update
      */
+    @Override
     public String updateEmployee(int id, EmployeeDto employeeDto) {
         Employee employee = checkIdPresentOrNot(id);
         BeanUtils.copyProperties(employeeDto, employee);
@@ -86,6 +90,7 @@ public class EmployeePayrollService implements IEmployeePayrollService {
      * @param empId to search for existing data in repo
      * @return success message for delete
      */
+    @Override
     public String deleteEmployee(int empId) {
         Employee employee = checkIdPresentOrNot(empId);
         employeeRepo.delete(employee);
@@ -98,6 +103,7 @@ public class EmployeePayrollService implements IEmployeePayrollService {
      * @param empId for check
      * @return Employee Entity
      */
+    @Override
     public Employee checkIdPresentOrNot(int empId) {
         return employeeRepo.findById(empId).orElseThrow(EntityNotFoundException::new);
     }

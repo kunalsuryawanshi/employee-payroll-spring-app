@@ -18,6 +18,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfiguration {
+    /**
+     * Purpose : This method is used to specify the swagger to which API(Application Programming Interface)
+     * to show on Swagger UI(User Interface) console
+     *
+     * @return the docket link which has the information about API(Application Programming Interface)
+     */
     @Bean
     public Docket postApi() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -27,6 +33,12 @@ public class SwaggerConfiguration {
                 .build();
     }
 
+    /**
+     * Purpose : This method is used to add extra data which will give user a proper idea about
+     * the API(Application Programming Interface) information in the Swagger UI(User Interface) console
+     *
+     * @return the swagger API information
+     */
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder().title("Employee Payroll Application")
                 .description("Sample Documentation Generated Using SWAGGER2 for Employee Payroll Rest API")
